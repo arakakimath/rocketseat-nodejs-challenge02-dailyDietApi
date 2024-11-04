@@ -11,7 +11,8 @@
   "author": "Matheus Arakaki",
   "license": "ISC",
   "dependencies": {
-    "fastify": "^5.1.0"
+    "fastify": "^5.1.0",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@rocketseat/eslint-config": "^2.2.2",
