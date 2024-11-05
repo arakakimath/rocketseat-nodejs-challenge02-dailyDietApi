@@ -4,7 +4,7 @@ interface Meal {
   description: string
   diet: string
   meal_time: string
-  created_at: string
+  created_at?: string
   updated_at: string
   session_id?: string
 }

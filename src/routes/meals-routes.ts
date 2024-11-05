@@ -15,7 +15,9 @@ export async function mealsRoutes(app: FastifyInstance) {
       preHandler: [checkSessionIdExists],
     },
     (request, reply) => {
-      return database.showAll('meals')
+      const { sessionId } = request.cookies
+
+      return database.showAll('meals', sessionId)
     },
   )
 
@@ -26,8 +28,9 @@ export async function mealsRoutes(app: FastifyInstance) {
     },
     (request, reply) => {
       const id = getId(request, reply)
+      const { sessionId } = request.cookies
 
-      return database.showOne('meals', id)
+      return database.showOne('meals', { id, sessionId })
     },
   )
 
@@ -68,10 +71,41 @@ export async function mealsRoutes(app: FastifyInstance) {
   app.put(
     '/:id',
     {
+      preHandler: [checkSessionIdExists, checkBodyMeals],
+    },
+    (request, reply) => {
+      const id = getId(request, reply)
+      const { sessionId } = request.cookies
+      const { name, description, date, hour, diet } = request.body
+
+      database.edit('meals', {
+        id,
+        name,
+        description,
+        meal_time: dayjs(date)
+          .hour(hour.split(':')[0])
+          .minute(hour.split(':')[1])
+          .format('DD/MM/YY, HH:mm'),
+        diet,
+        sessionId,
+      })
+
+      return reply.status(200).send()
+    },
+  )
+
+  app.delete(
+    '/:id',
+    {
       preHandler: [checkSessionIdExists],
     },
     (request, reply) => {
       const id = getId(request, reply)
+      const { sessionId } = request.cookies
+
+      database.remove('meals', { id, sessionId })
+
+      return reply.status(200).send()
     },
   )
 }

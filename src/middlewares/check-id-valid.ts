@@ -1,15 +1,15 @@
 import { FastifyReply, FastifyRequest } from 'fastify'
 import z, { ZodError } from 'zod'
 
-export function getId(request: FastifyRequest, reply: FastifyReply) {
+export function getId(request: FastifyRequest, reply: FastifyReply): string {
   const idSchema = z.object({
     id: z.string().uuid(),
   })
 
-  let id
+  let _id
 
   try {
-    id = idSchema.parse(request.params)
+    _id = idSchema.parse(request.params)
   } catch (err) {
     if (err instanceof ZodError) {
       console.log(JSON.parse(err.message)[0].message)
@@ -22,6 +22,6 @@ export function getId(request: FastifyRequest, reply: FastifyReply) {
       throw new Error(err)
     }
   }
-
+  const { id } = _id
   return id
 }
