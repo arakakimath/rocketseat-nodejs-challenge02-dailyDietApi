@@ -1,5 +1,5 @@
 import { FastifyInstance } from 'fastify'
-import { checkBodyMeals } from '../database/middlewares/check-body-meals'
+import { checkBodyMeals } from '../middlewares/check-body-meals'
 
 export async function mealsRoutes(app: FastifyInstance) {
   app.get('/', (request, reply) => 'Hello wworld')
