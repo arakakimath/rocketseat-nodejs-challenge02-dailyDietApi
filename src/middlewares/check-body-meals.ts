@@ -1,5 +1,6 @@
+/* eslint-disable prettier/prettier */
 import { FastifyReply, FastifyRequest } from 'fastify'
-import z from 'zod'
+import z, { ZodError } from 'zod'
 
 export async function checkBodyMeals(
   request: FastifyRequest,
@@ -20,8 +21,19 @@ export async function checkBodyMeals(
   try {
     bodySchema.parse(request.body)
   } catch (err) {
-    return reply.status(400).send({
-      error: err
-    })
+    if (err instanceof ZodError) {
+      console.log(JSON.parse(err.message)[0].message)
+
+      return reply.status(400).send({
+        message: JSON.parse(err.message)[0].message,
+        status: 'error',
+      })
+    } else {
+      return reply.status(500).send({
+        message: 'An internal error ocurred',
+        status: 'error'
+      })
+    }
+
   }
 }
