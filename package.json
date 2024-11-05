@@ -11,7 +11,12 @@
   "author": "Matheus Arakaki",
   "license": "ISC",
   "dependencies": {
+    "@types/node": "^22.9.0",
+    "dotenv": "^16.4.5",
     "fastify": "^5.1.0",
+    "knex": "^3.1.0",
+    "pg": "^8.13.1",
+    "sqlite3": "^5.1.7",
     "zod": "^3.23.8"
   },
   "devDependencies": {
