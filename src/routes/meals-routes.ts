@@ -5,7 +5,9 @@ import { checkBodyMeals } from '../middlewares/check-body-meals'
 import { database } from '../database/database-tools'
 
 export async function mealsRoutes(app: FastifyInstance) {
-  app.get('/', (request, reply) => 'Hello wworld')
+  app.get('/', (request, reply) => {
+    return database.showAll('meals')
+  })
 
   app.post(
     '/',
@@ -15,13 +17,14 @@ export async function mealsRoutes(app: FastifyInstance) {
     (request, reply) => {
       const { name, description, date, hour, diet } = request.body
 
-      database.insert('meals',{
+      database.insert('meals', {
         name,
         description,
-        meal_time: dayjs().day(date).hour(hour),
+        meal_time: dayjs(date)
+          .hour(hour.split(':')[0])
+          .minute(hour.split(':')[1])
+          .format('DD/MM/YY, HH:mm'),
         diet,
-        created_at: dayjs(),
-        updated_at: dayjs(),
       })
 
       return reply.status(201).send()

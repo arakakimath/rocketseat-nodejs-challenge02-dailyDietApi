@@ -14,7 +14,7 @@ export async function checkBodyMeals(
     hour: z.string().refine((value) => /^\d{2}:\d{2}$/.test(value), {
       message: 'Hour must be in HH:mm format',
     }),
-    diet: z.boolean(),
+    diet: z.enum(['yes', 'no']),
   })
 
   try {
