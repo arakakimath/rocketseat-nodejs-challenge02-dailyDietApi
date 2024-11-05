@@ -1,11 +1,13 @@
 import { app } from './app'
-
+import { env } from './env'
 
 app
   .listen({
-    port: 3333,
-    host: '0.0.0.0',
+    port: env.PORT,
+    host: env.HOST,
   })
-  .then((err) => {
-    console.log(err)
+  .then((address) => {
+    console.log(
+      `HTTP Server listening at ${address.replace('[::1]', 'localhost')}`,
+    )
   })
