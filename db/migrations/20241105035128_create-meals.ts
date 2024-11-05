@@ -8,8 +8,8 @@ export async function up(knex: Knex): Promise<void> {
     table.text('description')
     table.timestamp('meal_time').notNullable()
     table.boolean('diet').notNullable()
-    table.timestamp('created_at').defaultTo(knex.fn.now()).notNullable()
-    table.timestamp('updated_at').defaultTo(knex.fn.now()).notNullable()
+    table.timestamp('created_at').notNullable()
+    table.timestamp('updated_at').notNullable()
   })
 }
 
