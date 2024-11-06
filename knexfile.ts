@@ -1,3 +1,3 @@
-import { config } from './src/database/databasesetup'
+import { config } from './src/databasesetup'
 
 export default config
