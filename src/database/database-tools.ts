@@ -1,5 +1,5 @@
 import { randomUUID } from 'node:crypto'
-import { knex } from '../databasesetup'
+import { knex } from './database-setup'
 
 export const database = {
   showAll: async (table: string, sessionId: string) => {
