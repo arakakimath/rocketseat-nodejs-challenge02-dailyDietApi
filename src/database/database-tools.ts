@@ -9,16 +9,51 @@ export const database = {
 
     const dietMeals = meals.filter((meal) => meal.diet.toLowerCase() === 'yes')
 
+    const mealsInOrder = meals.sort((a, b) => {
+      const [dayA, timeA] = a.meal_time.split(', ')
+      const [dayB, timeB] = b.meal_time.split(', ')
+
+      const arrayA = []
+      const arrayB = []
+
+      arrayA.push(dayA.split('/').reverse().join('-'), timeA)
+      arrayB.push(dayB.split('/').reverse().join('-'), timeB)
+
+      const dateA = new Date(
+        arrayA.join('T'),
+      )
+      const dateB = new Date(
+        arrayB.join('T'),
+      )
+
+      return dateA - dateB
+    })
+
+    const mealsRecords = {
+      acc: 0,
+      record: 0
+    }
+
+    for (const meal of mealsInOrder) {
+      if (meal.diet === 'yes') {
+        mealsRecords.acc++
+        if (mealsRecords.acc > mealsRecords.record)
+          mealsRecords.record = mealsRecords.acc
+      } else {
+        mealsRecords.acc = 0
+      }
+    }
+
     return {
       totalMeals: meals.length,
       dietMeals: dietMeals.length,
       offDietMeals: meals.length - dietMeals.length,
-      meals,
+      biggestSequence: mealsRecords.record,
+      meals: mealsInOrder,
     }
   },
 
   showOne: async (table: string, search: Search) => {
-    console.log(search.id)
     return await knex<Meal>(table)
       .where({
         session_id: search.sessionId,

@@ -59,7 +59,7 @@ export async function mealsRoutes(app: FastifyInstance) {
         meal_time: dayjs(date)
           .hour(hour.split(':')[0])
           .minute(hour.split(':')[1])
-          .format('DD/MM/YY, HH:mm'),
+          .format('DD/MM/YYYY, HH:mm'),
         diet,
         session_id: sessionId,
       })
@@ -85,7 +85,7 @@ export async function mealsRoutes(app: FastifyInstance) {
         meal_time: dayjs(date)
           .hour(hour.split(':')[0])
           .minute(hour.split(':')[1])
-          .format('DD/MM/YY, HH:mm'),
+          .format('DD/MM/YYYY, HH:mm'),
         diet,
         sessionId,
       })

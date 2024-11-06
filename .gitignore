@@ -10,3 +10,5 @@ build
 
 # Database
 db/*.db
+
+test.ts
