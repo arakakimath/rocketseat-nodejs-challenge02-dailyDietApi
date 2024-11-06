@@ -1,5 +1,5 @@
 import { randomUUID } from 'node:crypto'
-import { knex } from './database-setup'
+import { knex } from './databasesetup'
 
 export const database = {
   showAll: async (table: string, sessionId: string) => {
@@ -19,19 +19,15 @@ export const database = {
       arrayA.push(dayA.split('/').reverse().join('-'), timeA)
       arrayB.push(dayB.split('/').reverse().join('-'), timeB)
 
-      const dateA = new Date(
-        arrayA.join('T'),
-      )
-      const dateB = new Date(
-        arrayB.join('T'),
-      )
+      const dateA = new Date(arrayA.join('T'))
+      const dateB = new Date(arrayB.join('T'))
 
       return dateA - dateB
     })
 
     const mealsRecords = {
       acc: 0,
-      record: 0
+      record: 0,
     }
 
     for (const meal of mealsInOrder) {
