@@ -1,6 +1,5 @@
 import { FastifyInstance } from 'fastify'
 import dayjs from 'dayjs'
-import z from 'zod'
 import { randomUUID } from 'node:crypto'
 
 import { checkBodyMeals } from '../middlewares/check-body-meals'
