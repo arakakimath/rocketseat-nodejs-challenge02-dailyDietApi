@@ -11,7 +11,8 @@
     "dev": "tsx watch src/server.ts",
     "knex-make": "npx knex migrate:make",
     "knex-run": "npx knex migrate:latest",
-    "lint": "eslint src --ext .ts"
+    "lint": "eslint src --ext .ts",
+    "build": "tsup src --out-dir build"
   },
   "keywords": [],
   "author": "Matheus Arakaki",
@@ -31,6 +32,7 @@
     "eslint": "^8.57.1",
     "sqlite3": "^5.1.7",
     "ts-node": "^10.9.2",
+    "tsup": "^8.3.5",
     "tsx": "^4.19.2",
     "typescript": "^5.6.3"
   }
