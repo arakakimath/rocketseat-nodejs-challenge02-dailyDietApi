@@ -2,6 +2,7 @@
   "name": "dailydietapi",
   "description": "challenge 02 of the nodejs course from rocketseat",
   "version": "1.0.0",
+  "type": "module",
   "main": "build/server.js",
   "engines": {
     "node": ">= 18"
